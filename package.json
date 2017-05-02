@@ -1,6 +1,6 @@
 {
   "name": "swagger-to-serverless",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convert swagger.yml to serverless.yml and generate basic js files",
   "main": "swagger-to-serverless.js",
   "scripts": {
