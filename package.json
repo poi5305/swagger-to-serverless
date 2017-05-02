@@ -1,0 +1,26 @@
+{
+  "name": "swagger-to-serverless",
+  "version": "1.0.0",
+  "description": "Convert swagger.yml to serverless.yml and generate basic js files",
+  "main": "swagger-to-serverless.js",
+  "scripts": {
+    "test": "swagger-to-serverless.js swagger.yml serverless.yml output"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/poi5305/swagger-to-serverless.git"
+  },
+  "keywords": [
+    "swagger",
+    "serverless"
+  ],
+  "author": "Andy",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/poi5305/swagger-to-serverless/issues"
+  },
+  "homepage": "https://github.com/poi5305/swagger-to-serverless#readme",
+  "dependencies": {
+    "js-yaml": "^3.8.3"
+  }
+}
