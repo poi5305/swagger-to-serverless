@@ -1,0 +1,159 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Example
+host: unknown
+basePath: /v1
+tags:
+  - name: Auth
+  - name: Users
+  - name: Books
+schemes:
+  - https
+paths:
+  /auth/accessToken:
+    get:
+      tags:
+        - Auth
+      summary: Get access tocken
+      parameters:
+        - in: query
+          name: account
+          description: account
+          type: string
+          required: true
+        - in: query
+          name: password
+          description: password
+          type: string
+          required: true
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              accessToken:
+                type: string
+  /users:
+    post:
+      tags:
+        - Users
+      summary: regist a new user
+      parameters:
+        - in: body
+          name: user
+          description: user account and password
+          required: true
+          schema:
+            type: object
+            properties:
+              account:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: successful operation
+    patch:
+      tags:
+        - Users
+      summary: change password
+      parameters:
+        - "$ref": "#/parameters/authorization"
+        - in: body
+          name: user
+          description: user password
+          required: true
+          schema:
+            type: object
+            properties:
+              password:
+                type: string
+      responses:
+        200:
+          description: successful operation
+          
+  /users/{userId}:
+    get:
+      tags:
+        - Users
+      summary: get user detail
+      parameters:
+        - "$ref": "#/parameters/authorization"
+        - "$ref": "#/parameters/userId"
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              userName:
+                type: string
+              userProfile:
+                type: string
+
+  /users/{userId}/Books:
+    get:
+      tags:
+        - Users
+      summary: get books post by userId
+      parameters:
+        - "$ref": "#/parameters/authorization"
+        - "$ref": "#/parameters/userId"
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                bookId:
+                  type: string
+                bookName:
+                  type: string
+  /books/{bookId}:
+    get:
+      tags:
+        - Books
+      summary: get book detail
+      parameters:
+        - "$ref": "#/parameters/authorization"
+        - "$ref": "#/parameters/bookId"
+      responses:
+        200:
+          description: get book detail
+          schema:
+            type: object
+            properties:
+              content:
+                type: string
+  /books/{bookId}/like:
+    post:
+      tags:
+        - Books
+      summary: like book detail
+      parameters:
+        - "$ref": "#/parameters/authorization"
+        - "$ref": "#/parameters/bookId"
+      responses:
+        200:
+          description: successful operation
+parameters:
+  authorization:
+    in: header
+    name: Authorization
+    description: access tocken
+    type: string
+    required: true
+  bookId:
+    name: bookId
+    in: path
+    required: true
+    type: integer
+  userId:
+    name: userId
+    in: path
+    required: true
+    type: integer     

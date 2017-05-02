@@ -1,0 +1,98 @@
+service: book
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: ap-northeast-1
+functions:
+  e2b4-GetAuthAccessToken:
+    handler: handler.getAuthAccessToken
+    events:
+      - http:
+          cors: true
+          method: get
+          path: /auth/accessToken
+          integration: lambda
+          request:
+            parameters:
+              querystrings:
+                account: true
+                password: true
+  1725-PostUsers:
+    handler: handler.postUsers
+    events:
+      - http:
+          cors: true
+          method: post
+          path: /users
+          integration: lambda
+          request:
+            parameters: {}
+  05b8-PatchUsers:
+    handler: handler.patchUsers
+    events:
+      - http:
+          cors: true
+          method: patch
+          path: /users
+          integration: lambda
+          request:
+            parameters:
+              headers:
+                Authorization: true
+  b2b7-GetUsers:
+    handler: handler.getUsers
+    events:
+      - http:
+          cors: true
+          method: get
+          path: '/users/{userId}'
+          integration: lambda
+          request:
+            parameters:
+              headers:
+                Authorization: true
+              paths:
+                userId: true
+  d05b-GetUsersBooks:
+    handler: handler.getUsersBooks
+    events:
+      - http:
+          cors: true
+          method: get
+          path: '/users/{userId}/Books'
+          integration: lambda
+          request:
+            parameters:
+              headers:
+                Authorization: true
+              paths:
+                userId: true
+  38fb-GetBooks:
+    handler: handler.getBooks
+    events:
+      - http:
+          cors: true
+          method: get
+          path: '/books/{bookId}'
+          integration: lambda
+          request:
+            parameters:
+              headers:
+                Authorization: true
+              paths:
+                bookId: true
+  790a-PostBooksLike:
+    handler: handler.postBooksLike
+    events:
+      - http:
+          cors: true
+          method: post
+          path: '/books/{bookId}/like'
+          integration: lambda
+          request:
+            parameters:
+              headers:
+                Authorization: true
+              paths:
+                bookId: true

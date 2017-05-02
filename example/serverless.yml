@@ -1,0 +1,6 @@
+service: book
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: ap-northeast-1
